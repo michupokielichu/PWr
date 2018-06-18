@@ -1,4 +1,4 @@
-package com.myo.starter;
+package com.myo.data.collector;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
