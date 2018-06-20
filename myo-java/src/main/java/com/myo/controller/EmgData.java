@@ -2,6 +2,7 @@ package com.myo.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.swing.JPanel;
 
@@ -16,6 +17,7 @@ import com.thalmic.myo.Myo;
 import com.thalmic.myo.enums.StreamEmgType;
 
 public class EmgData {
+	ResourceBundle bundle = ResourceBundle.getBundle("Translation");
 	static double seconds = 2;
 	static double pointsPerSecond = 100;
 	private static int CHANNELS_NUMBER = 8;
@@ -57,8 +59,9 @@ public class EmgData {
 			charts = new ArrayList<XYChart>();
 			panels = new ArrayList<>();
 			for (int i = 0; i < CHANNELS_NUMBER; i++) {
-				XYChart chart = QuickChart.getChart("The Myo - Elektromyography", "Time[s]", "EMG", "Channel " + i,
-						initdata[0], initdata[1]);
+				XYChart chart = QuickChart.getChart(bundle.getString("chart.channel") + " " + (+i + 1),
+						bundle.getString("chart.time"), "", "Channel " + i, initdata[0], initdata[1]);
+				chart.getStyler().setLegendVisible(false);
 				chart.getStyler().setYAxisMin((double) -120);
 				chart.getStyler().setYAxisMax((double) 120);
 				charts.add(chart);
