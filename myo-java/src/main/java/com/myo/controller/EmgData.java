@@ -101,4 +101,12 @@ public class EmgData {
 		return panels;
 	}
 
+	public void start() {
+
+	}
+
+	public void stop() {
+
+	}
+
 }

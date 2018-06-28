@@ -2,6 +2,8 @@ package com.myo.view;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -23,6 +25,13 @@ public class MainView extends JFrame implements Runnable {
 	JSplitPane mSplitPane;
 	JPanel leftPanel;
 	JPanel rightPanel;
+	JTextField length;
+	JTextField pause;
+	JTextField classType;
+	JTextField path;
+	JTextField points;
+	JButton start;
+	JButton stop;
 
 	public MainView(EmgData emgData) throws ClassNotFoundException, InstantiationException, IllegalAccessException,
 			UnsupportedLookAndFeelException {
@@ -59,25 +68,51 @@ public class MainView extends JFrame implements Runnable {
 
 		JPanel northPanel = new JPanel();
 
-		northPanel.setLayout(new GridLayout(6, 2));
+		length = new JTextField("2");
+		pause = new JTextField("1");
+		classType = new JTextField("1");
+		path = new JTextField(System.getProperty("user.home") + "\\Desktop\\file.mat");
+		points = new JTextField("100");
+		start = new JButton(bundle.getString("button.start"));
+		stop = new JButton(bundle.getString("button.stop"));
+
+		northPanel.setLayout(new GridLayout(7, 2));
 		northPanel.add(new JLabel(bundle.getString("settings.length")));
-		northPanel.add(new JTextField("2"));
+		northPanel.add(length);
 
 		northPanel.add(new JLabel(bundle.getString("settings.pause")));
-		northPanel.add(new JTextField("1"));
+		northPanel.add(pause);
 
 		northPanel.add(new JLabel(bundle.getString("settings.class")));
-		northPanel.add(new JTextField("1"));
+		northPanel.add(classType);
+
 		northPanel.add(new JLabel(bundle.getString("settings.path")));
-		northPanel.add(new JTextField(System.getProperty("user.home") + "\\Desktop\\file.mat"));
+		northPanel.add(path);
+
+		northPanel.add(new JLabel(bundle.getString("settings.points")));
+		northPanel.add(points);
 
 		northPanel.add(new JLabel());
 		northPanel.add(new JLabel());
 
-		northPanel.add(new JLabel());
-		northPanel.add(new JButton("Start"));
+		northPanel.add(start);
+		northPanel.add(stop);
 
 		leftPanel.add(northPanel, BorderLayout.NORTH);
+
+		start.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mEmgData.start();
+			}
+		});
+		
+		stop.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mEmgData.stop();
+			}
+		});
 	}
 
 	@Override
